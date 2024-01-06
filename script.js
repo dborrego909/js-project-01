@@ -1,44 +1,64 @@
-// Create array of possible options for game
-const options = ["rock", "scissor", "paper"];
+const options = ["rock", "paper", "scissors"]
 
-// Function getComputerChoice () from array pick random option
-function getComputerChoice() {
-    const computerSelection = options[Math.floor(Math.random() * options.length)];
-    console.log("Computer's choice is ", computerSelection); // Test out if works
-    return computerSelection; // Return the computer's choice
+function getComputerChoice () {
+    const choice = options[Math.floor(Math.random() * options.length)];
+    return choice;
 }
-getComputerChoice();
+getComputerChoice ();
 
-// Function checkWinner for player, computer for tie, if player wins
-// else computer wins
-function checkWinner(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
+function checkWinner (playerSelection, computerSelection) {
+    if(playerSelection === computerSelection){
         return "tie";
-    } else if (
-        (playerSelection === "rock" && computerSelection === "scissor") ||
+    } 
+    else if(
+        (playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "paper" && computerSelection === "rock") ||
         (playerSelection === "scissors" && computerSelection === "paper")
-    ) {
+    ){
         return "Player";
     } else {
         return "Computer";
     }
 }
 
-// function playRound if return tie result is tie, if return is 
-// player wins result is player wins
-// else result is computer wins
-function playRound(playerSelection, computerSelection) {
+function playRound (playerSelection, computerSelection) {
     const result = checkWinner(playerSelection, computerSelection);
-    if (result === "tie") {
+    if(result === "tie") {
         return "Tie";
-    } else if (result === "Player") {
-        return `You Win! ${playerSelection} beats ${computerSelection}`;
-    } else if (result === "Computer") {
-        return `You lose.. ${computerSelection} beats ${playerSelection}`;
+    } else if(result === "Player") {
+        return `You Win! ${playerSelection} beats ${computerSelection}`
+    } else {
+        return `You Lose.. ${computerSelection} beats ${playerSelection}`
     }
 }
 
-const playerSelection = "paper";
-const computerSelection = getComputerChoice(); // Call the function and get the computer's choice
-console.log(playRound(playerSelection, computerSelection));
+const playerSelection = getPlayerChoice();
+const computerSelection = getComputerChoice();
+console.log(playRound(playerSelection, computerSelection))
+
+function getPlayerChoice (){
+    let validatedInput = false;
+    while(validatedInput == false){
+        const choice = prompt("Rock Paper Scissors");
+        if(choice == null){
+            continue;
+        }
+        const choiceInLower = choice.toLowerCase();
+        if(options.includes(choiceInLower)){
+            validatedInput = true;
+            return choiceInLower;
+        }
+    }
+}
+
+function game(){
+    console.log("welcome");
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = getPlayerChoice();
+        const computerSelection = getComputerChoice();
+        console.log(playRound( playerSelection, computerSelection));
+        
+    }
+}
+
+game()
