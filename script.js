@@ -14,3 +14,27 @@ function getComputerChoice () {
 }
 
 getComputerChoice ()
+
+function playRound (playerSelection, computerChoice) {
+        console.log("Players choice is ", playerSelection);
+        if (playerSelection === computerChoice) {
+            return "Tie";
+        } else if(
+            (playerSelection === "paper" && computerChoice === "rock") ||
+            (playerSelection === "rock" && computerChoice === "scissors") ||
+            (playerSelection === "scissors" && computerChoice === "paper") 
+        ){
+            return "Player";
+        } else 
+        { return "Computer"
+    }
+}
+        
+    
+
+
+const playerSelection = "paper";
+const computerChoice = getComputerChoice ();
+console.log()
+
+playRound ()
