@@ -1,40 +1,44 @@
-// Define what the options are for game
-// options = rock, paper, scissors
+// Create array of possible options for game
+const options = ["rock", "scissor", "paper"];
 
-// Function to create computers choice
-// function getComputerChoice(); 
-// indexArray getComputerChoice
-
-const options = ["rock", "paper", "scissors"];
-
-function getComputerChoice () {
-    const computerChoice = options[Math.floor(Math.random() * options.length)];
-    console.log(computerChoice);
-    return computerChoice;
+// Function getComputerChoice () from array pick random option
+function getComputerChoice() {
+    const computerSelection = options[Math.floor(Math.random() * options.length)];
+    console.log("Computer's choice is ", computerSelection); // Test out if works
+    return computerSelection; // Return the computer's choice
 }
+getComputerChoice();
 
-getComputerChoice ()
-
-function playRound (playerSelection, computerChoice) {
-        console.log("Players choice is ", playerSelection);
-        if (playerSelection === computerChoice) {
-            return "Tie";
-        } else if(
-            (playerSelection === "paper" && computerChoice === "rock") ||
-            (playerSelection === "rock" && computerChoice === "scissors") ||
-            (playerSelection === "scissors" && computerChoice === "paper") 
-        ){
-            return "Player";
-        } else 
-        { return "Computer"
+// Function checkWinner for player, computer for tie, if player wins
+// else computer wins
+function checkWinner(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        return "tie";
+    } else if (
+        (playerSelection === "rock" && computerSelection === "scissor") ||
+        (playerSelection === "paper" && computerSelection === "rock") ||
+        (playerSelection === "scissors" && computerSelection === "paper")
+    ) {
+        return "Player";
+    } else {
+        return "Computer";
     }
 }
-        
-    
 
+// function playRound if return tie result is tie, if return is 
+// player wins result is player wins
+// else result is computer wins
+function playRound(playerSelection, computerSelection) {
+    const result = checkWinner(playerSelection, computerSelection);
+    if (result === "tie") {
+        return "Tie";
+    } else if (result === "Player") {
+        return `You Win! ${playerSelection} beats ${computerSelection}`;
+    } else if (result === "Computer") {
+        return `You lose.. ${computerSelection} beats ${playerSelection}`;
+    }
+}
 
 const playerSelection = "paper";
-const computerChoice = getComputerChoice ();
-console.log()
-
-playRound ()
+const computerSelection = getComputerChoice(); // Call the function and get the computer's choice
+console.log(playRound(playerSelection, computerSelection));
